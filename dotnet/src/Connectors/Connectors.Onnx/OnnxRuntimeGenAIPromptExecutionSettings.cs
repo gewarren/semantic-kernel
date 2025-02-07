@@ -64,20 +64,23 @@ public sealed class OnnxRuntimeGenAIPromptExecutionSettings : PromptExecutionSet
     }
 
     /// <summary>
-    /// Top k tokens to sample from
+    /// Gets or sets the number of most-likely candidates that the model considers for the next token.
     /// </summary>
     [JsonPropertyName("top_k")]
     public int? TopK { get; set; }
 
     /// <summary>
-    /// Top p probability to sample with
+    /// Gets or sets the percentile of most-likely candidates that the model considers for the next token.
     /// </summary>
     [JsonPropertyName("top_p")]
     public float? TopP { get; set; }
 
     /// <summary>
-    /// Temperature to sample with
+    /// Gets or sets the sampling temperature.
     /// </summary>
+    /// <remarks>
+    /// Higher values make the model answer more creatively.
+    /// </remarks>
     [JsonPropertyName("temperature")]
     public float? Temperature { get; set; }
 

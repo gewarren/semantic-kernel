@@ -8,7 +8,7 @@ using Microsoft.SemanticKernel.Text;
 namespace Microsoft.SemanticKernel.Connectors.Amazon;
 
 /// <summary>
-/// Prompt execution settings for Cohere Command Text Generation
+/// Provides prompt execution settings for Cohere Command Text Generation.
 /// </summary>
 [JsonNumberHandling(JsonNumberHandling.AllowReadingFromString)]
 public class AmazonCommandExecutionSettings : PromptExecutionSettings
@@ -25,8 +25,11 @@ public class AmazonCommandExecutionSettings : PromptExecutionSettings
     private string? _truncate;
 
     /// <summary>
-    /// Use a lower value to decrease randomness in the response.
+    /// Gets or sets the sampling temperature to use.
     /// </summary>
+    /// <remarks>
+    /// Use a lower value to decrease randomness in the response.
+    /// </remarks>
     [JsonPropertyName("temperature")]
     public double? Temperature
     {
@@ -39,8 +42,11 @@ public class AmazonCommandExecutionSettings : PromptExecutionSettings
     }
 
     /// <summary>
-    /// Top P. Use a lower value to ignore less probable options. Set to 0 or 1.0 to disable. If both p and k are enabled, p acts after k.
+    /// Gets or sets the probability mass of tokens whose results are considered in nucleus sampling.
     /// </summary>
+    /// <remarks>
+    /// Use a lower value to ignore less probable options. Set to 0 or 1.0 to disable. If both p and k are enabled, p acts after k.
+    /// </remarks>
     [JsonPropertyName("p")]
     public double? TopP
     {
@@ -53,8 +59,11 @@ public class AmazonCommandExecutionSettings : PromptExecutionSettings
     }
 
     /// <summary>
-    /// Top K. Specify the number of token choices the model uses to generate the next token. If both p and k are enabled, p acts after k.
+    /// Gets or sets the number of token choices the model uses to generate the next token.
     /// </summary>
+    /// <remarks>
+    /// If both p and k are enabled, p acts after k.
+    /// </remarks>
     [JsonPropertyName("k")]
     public double? TopK
     {
@@ -67,7 +76,7 @@ public class AmazonCommandExecutionSettings : PromptExecutionSettings
     }
 
     /// <summary>
-    /// Specify the maximum number of tokens to use in the generated response.
+    /// Gets or sets the maximum number of tokens to use in the generated response.
     /// </summary>
     [JsonPropertyName("max_tokens")]
     public int? MaxTokens
@@ -81,8 +90,11 @@ public class AmazonCommandExecutionSettings : PromptExecutionSettings
     }
 
     /// <summary>
-    /// Configure up to four sequences that the model recognizes. After a stop sequence, the model stops generating further tokens. The returned text doesn't contain the stop sequence.
+    /// Gets or sets the sequences that cause the model to stop generating.
     /// </summary>
+    /// <remarks>
+    /// Configure up to four sequences that the model recognizes. After a stop sequence, the model stops generating further tokens. The returned text doesn't contain the stop sequence.
+    /// </remarks>
     [JsonPropertyName("stop_sequences")]
     public List<string>? StopSequences
     {
@@ -95,8 +107,11 @@ public class AmazonCommandExecutionSettings : PromptExecutionSettings
     }
 
     /// <summary>
-    /// Specify how and if the token likelihoods are returned with the response. You can specify the following options: GENERATION, ALL, or NONE.
+    /// Gets or sets a value that indicates which token likelihoods are returned with the response.
     /// </summary>
+    /// <value>
+    /// <see langword="GENERATION"/>, <see langword="ALL"/>, or <see langword="NONE"/>.
+    /// </value>
     [JsonPropertyName("return_likelihoods")]
     public string? ReturnLikelihoods
     {
@@ -109,8 +124,14 @@ public class AmazonCommandExecutionSettings : PromptExecutionSettings
     }
 
     /// <summary>
-    /// (Required to support streaming) Specify true to return the response piece-by-piece in real-time and false to return the complete response after the process finishes.
+    /// Gets or sets a value that indicates whether the response is returned piece-by-piece or when it's complete.
     /// </summary>
+    /// <value>
+    /// <see langword="true"/> to return the response piece-by-piece in real-time. <see langword="false"/> to return the complete response after the process finishes.
+    /// </value>
+    /// <remarks>
+    /// This property is required to support streaming.
+    /// </remarks>
     [JsonPropertyName("stream")]
     public bool? Stream
     {
@@ -123,7 +144,7 @@ public class AmazonCommandExecutionSettings : PromptExecutionSettings
     }
 
     /// <summary>
-    /// The maximum number of generations that the model should return.
+    /// Gets or sets the maximum number of generations that the model should return.
     /// </summary>
     [JsonPropertyName("num_generations")]
     public int? NumGenerations
@@ -137,8 +158,14 @@ public class AmazonCommandExecutionSettings : PromptExecutionSettings
     }
 
     /// <summary>
-    /// Prevents the model from generating unwanted tokens or incentivizes the model to include desired tokens. The format is {token_id: bias} where bias is a float between -10 and 10. Tokens can be obtained from text using any tokenization service, such as Cohere's Tokenize endpoint.
+    /// Gets or sets the bias for preventing generation of unwanted tokens or including desired tokens in the model.
     /// </summary>
+    /// <value>
+    /// The format is {token_id: bias}, where bias is a float between -10 and 10.
+    /// </value>
+    /// <remarks>
+    /// Tokens can be obtained from text using any tokenization service, such as Cohere's Tokenize endpoint.
+    /// </remarks>
     [JsonPropertyName("logit_bias")]
     public Dictionary<int, double>? LogitBias
     {
@@ -151,8 +178,11 @@ public class AmazonCommandExecutionSettings : PromptExecutionSettings
     }
 
     /// <summary>
-    /// Specifies how the API handles inputs longer than the maximum token length. Use one of the following: NONE, START, or END.
+    /// Gets or sets a value that specifies how the API handles inputs that are longer than the maximum token length.
     /// </summary>
+    /// <value>
+    /// <see langword="NONE"/>, <see langword="START"/>, or <see langword="END"/>.
+    /// </value>
     [JsonPropertyName("truncate")]
     public string? Truncate
     {
@@ -165,10 +195,10 @@ public class AmazonCommandExecutionSettings : PromptExecutionSettings
     }
 
     /// <summary>
-    /// Converts PromptExecutionSettings to AmazonCommandExecutionSettings
+    /// Converts PromptExecutionSettings to AmazonCommandExecutionSettings.
     /// </summary>
     /// <param name="executionSettings">The Kernel standard PromptExecutionSettings.</param>
-    /// <returns>Model specific execution settings</returns>
+    /// <returns>Model-specific execution settings.</returns>
     public static AmazonCommandExecutionSettings FromExecutionSettings(PromptExecutionSettings? executionSettings)
     {
         switch (executionSettings)

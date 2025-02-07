@@ -51,10 +51,13 @@ public sealed class HuggingFacePromptExecutionSettings : PromptExecutionSettings
     }
 
     /// <summary>
-    /// (Default: None). Integer to define the top tokens considered within the sample operation to create new text.
+    /// Gets or sets a value that defines the number of top tokens considered within the sample operation to create new text.
     /// </summary>
+    /// <value>
+    /// The default is none.
+    /// </value>
     /// <remarks>
-    /// This may not be supported by all models/inference API.
+    /// This property might not be supported by all models and inference APIs.
     /// </remarks>
     [JsonPropertyName("top_k")]
     public int? TopK
@@ -119,9 +122,14 @@ public sealed class HuggingFacePromptExecutionSettings : PromptExecutionSettings
     }
 
     /// <summary>
-    /// (Default: None). Float to define the tokens that are within the sample operation of text generation.
-    /// Add tokens in the sample for more probable to least probable until the sum of the probabilities is greater than top_p.
+    /// Gets or sets a value that defines the tokens that are within the sample operation of text generation.
     /// </summary>
+    /// <value>
+    /// The default value is none.
+    /// </value>
+    /// <remarks>
+    /// Add tokens in the sample for more probable to least probable until the sum of the probabilities is greater than TopP.
+    /// </remarks>
     [JsonPropertyName("top_p")]
     public float? TopP
     {

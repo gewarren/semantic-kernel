@@ -73,19 +73,25 @@ public sealed class AzureAIInvocationOptions
     public bool? ParallelToolCallsEnabled { get; init; }
 
     /// <summary>
-    /// Gets the number of recent messages that the thread will be truncated to.
+    /// Gets the number of recent messages that the thread is truncated to.
     /// </summary>
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public int? TruncationMessageCount { get; init; }
 
     /// <summary>
-    /// Gets the sampling temperature to use, between 0 and 2.
+    /// Gets the sampling temperature.
     /// </summary>
+    /// <value>
+    /// A value between 0.0 and 2.0.
+    /// </value>
+    /// <remarks>
+    /// This value controls the randomness of predictions made by the model.
+    /// </remarks>
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public float? Temperature { get; init; }
 
     /// <summary>
-    /// Gets the probability mass of tokens whose results are considered in nucleus sampling.
+    /// Gets or sets the percentile of most-likely candidates that the model considers for the next token.
     /// </summary>
     /// <remarks>
     /// It's recommended to set this property or <see cref="Temperature"/>, but not both.

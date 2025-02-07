@@ -63,9 +63,15 @@ public sealed class OllamaPromptExecutionSettings : PromptExecutionSettings
     }
 
     /// <summary>
-    /// Reduces the probability of generating nonsense. A higher value
-    /// (e.g. 100) will give more diverse answers, while a lower value (e.g. 10)
-    /// will be more conservative. (Default: 40)
+    /// Gets or sets a value that defines the number of top tokens considered within the sample operation to create new text.
+    /// </summary>
+    /// <value>
+    /// The default is 40.
+    /// </value>
+    /// <remarks>
+    /// This property reduces the probability of generating nonsense. A higher value
+    /// (for example, 100) gives more diverse answers, while a lower value (for example, 10)
+    /// is more conservative.
     /// </summary>
     [JsonPropertyName("top_k")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
@@ -81,10 +87,16 @@ public sealed class OllamaPromptExecutionSettings : PromptExecutionSettings
     }
 
     /// <summary>
-    /// Works together with top-k. A higher value (e.g., 0.95) will lead to
-    /// more diverse text, while a lower value (e.g., 0.5) will generate more
-    /// focused and conservative text. (Default: 0.9)
+    /// Gets or sets the percentile of most-likely candidates that the model considers for the next token.
     /// </summary>
+    /// <value>
+    /// The default value is 0.9.
+    /// </value>
+    /// <remarks>
+    /// This value works together with <see cref="TopK"/>. A higher value (for example, 0.95) leads to
+    /// more diverse text, while a lower value (for example, 0.5) generates more
+    /// focused and conservative text.
+    /// </remarks>
     [JsonPropertyName("top_p")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public float? TopP
@@ -99,9 +111,11 @@ public sealed class OllamaPromptExecutionSettings : PromptExecutionSettings
     }
 
     /// <summary>
-    /// The temperature of the model. Increasing the temperature will make the
-    /// model answer more creatively. (Default: 0.8)
+    /// Gets or sets sampling temperature, which controls the apparent creativity of generated completions.
     /// </summary>
+    /// <value>
+    /// Higher values make the model answer more creatively. The default value is 0.8.
+    /// </value>
     [JsonPropertyName("temperature")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public float? Temperature

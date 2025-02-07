@@ -7,7 +7,7 @@ using Microsoft.SemanticKernel.Text;
 namespace Microsoft.SemanticKernel.Connectors.Amazon;
 
 /// <summary>
-/// Prompt execution settings for Meta Llama 3 Text Generation
+/// Provides prompt execution settings for Meta Llama 3 Text Generation.
 /// </summary>
 [JsonNumberHandling(JsonNumberHandling.AllowReadingFromString)]
 public class AmazonLlama3ExecutionSettings : PromptExecutionSettings
@@ -17,8 +17,11 @@ public class AmazonLlama3ExecutionSettings : PromptExecutionSettings
     private int? _maxGenLen;
 
     /// <summary>
-    /// Use a lower value to decrease randomness in the response.
+    /// Gets or sets a value that indicates how much variation is provided in each answer.
     /// </summary>
+    /// <remarks>
+    /// Use a lower value to decrease randomness in the response.
+    /// </remarks>
     [JsonPropertyName("temperature")]
     public float? Temperature
     {
@@ -31,8 +34,14 @@ public class AmazonLlama3ExecutionSettings : PromptExecutionSettings
     }
 
     /// <summary>
-    /// Use a lower value to ignore less probable options. Set to 0 or 1.0 to disable.
+    /// Gets or sets the percentile of most-likely candidates that the model considers for the next token.
     /// </summary>
+    /// <value>
+    /// 0.0 to disable the setting. 1.0 to include all tokens.
+    /// </value>
+    /// <remarks>
+    /// Use a lower value to ignore less probable options.
+    /// </remarks>
     [JsonPropertyName("top_p")]
     public float? TopP
     {
@@ -45,8 +54,11 @@ public class AmazonLlama3ExecutionSettings : PromptExecutionSettings
     }
 
     /// <summary>
-    /// Specify the maximum number of tokens to use in the generated response. The model truncates the response once the generated text exceeds max_gen_len.
+    /// Gets or sets the maximum number of tokens to use in the generated response.
     /// </summary>
+    /// <remarks>
+    /// The model truncates the response once the generated text exceeds this value.
+    /// </remarks>
     [JsonPropertyName("max_gen_len")]
     public int? MaxGenLen
     {
@@ -59,10 +71,10 @@ public class AmazonLlama3ExecutionSettings : PromptExecutionSettings
     }
 
     /// <summary>
-    /// Converts PromptExecutionSettings to AmazonLlama3ExecutionSettings
+    /// Converts PromptExecutionSettings to AmazonLlama3ExecutionSettings.
     /// </summary>
     /// <param name="executionSettings">The Kernel standard PromptExecutionSettings.</param>
-    /// <returns>Model specific execution settings</returns>
+    /// <returns>Model-specific execution settings.</returns>
     public static AmazonLlama3ExecutionSettings FromExecutionSettings(PromptExecutionSettings? executionSettings)
     {
         switch (executionSettings)

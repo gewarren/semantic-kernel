@@ -80,11 +80,16 @@ internal sealed class ChatCompletionRequest
     public long? Seed { get; set; }
 
     /// <summary>
-    /// What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while
-    /// lower values like 0.2 will make it more focused and deterministic.
-    ///
-    /// We generally recommend altering this or `top_p` but not both.
+    /// Gets or sets sampling temperature, which controls the apparent creativity of generated completions.
     /// </summary>
+    /// <value>
+    /// A value between 0.0 and 2.0. Higher values, like 0.8, make the output more random.
+    /// Lower values, like 0.2, make it more focused and deterministic.
+    /// </value>
+    /// <summary>
+    /// <remarks>
+    /// It is not recommended to modify temperature and <see cref="TopP"/> for the same completions request.
+    /// </remarks>
     [JsonPropertyName("temperature")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public float? Temperature { get; set; }

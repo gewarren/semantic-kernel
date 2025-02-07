@@ -70,8 +70,7 @@ public sealed class GeminiPromptExecutionSettings : PromptExecutionSettings
     }
 
     /// <summary>
-    /// Gets or sets the value of the TopK property.
-    /// The TopK property represents the maximum value of a collection or dataset.
+    /// Gets or sets the maximum value of a collection or dataset.
     /// </summary>
     [JsonPropertyName("top_k")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]

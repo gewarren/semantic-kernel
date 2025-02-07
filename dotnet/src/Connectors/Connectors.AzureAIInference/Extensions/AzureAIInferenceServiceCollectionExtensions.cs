@@ -21,11 +21,11 @@ public static class AzureAIInferenceServiceCollectionExtensions
     /// Adds an Azure AI Inference <see cref="IChatCompletionService"/> to the <see cref="IServiceCollection"/>.
     /// </summary>
     /// <param name="services">The <see cref="IServiceCollection"/> instance to augment.</param>
-    /// <param name="modelId">Target Model Id</param>
-    /// <param name="apiKey">API Key</param>
-    /// <param name="endpoint">Endpoint / Target URI</param>
-    /// <param name="httpClient">Custom <see cref="HttpClient"/> for HTTP requests.</param>
-    /// <param name="serviceId">A local identifier for the given AI service</param>
+    /// <param name="modelId">The target Model ID.</param>
+    /// <param name="apiKey">The API key.</param>
+    /// <param name="endpoint">The endpoint or target URI.</param>
+    /// <param name="httpClient">A custom <see cref="HttpClient"/> for HTTP requests.</param>
+    /// <param name="serviceId">A local identifier for the given AI service.</param>
     /// <returns>The same instance as <paramref name="services"/>.</returns>
     public static IServiceCollection AddAzureAIInferenceChatCompletion(
         this IServiceCollection services,
@@ -67,11 +67,11 @@ public static class AzureAIInferenceServiceCollectionExtensions
     /// Adds an Azure AI Inference <see cref="IChatCompletionService"/> to the <see cref="IServiceCollection"/>.
     /// </summary>
     /// <param name="services">The <see cref="IServiceCollection"/> instance to augment.</param>
-    /// <param name="modelId">Target Model Id</param>
-    /// <param name="credential">Token credential, e.g. DefaultAzureCredential, ManagedIdentityCredential, EnvironmentCredential, etc.</param>
-    /// <param name="endpoint">Endpoint / Target URI</param>
-    /// <param name="httpClient">Custom <see cref="HttpClient"/> for HTTP requests.</param>
-    /// <param name="serviceId">A local identifier for the given AI service</param>
+    /// <param name="modelId">The target model ID.</param>
+    /// <param name="credential">The token credential, for example, DefaultAzureCredential, ManagedIdentityCredential, or EnvironmentCredential.</param>
+    /// <param name="endpoint">The endpoint or target URI.</param>
+    /// <param name="httpClient">A custom <see cref="HttpClient"/> for HTTP requests.</param>
+    /// <param name="serviceId">A local identifier for the given AI service.</param>
     /// <returns>The same instance as <paramref name="services"/>.</returns>
     public static IServiceCollection AddAzureAIInferenceChatCompletion(
         this IServiceCollection services,
@@ -113,9 +113,9 @@ public static class AzureAIInferenceServiceCollectionExtensions
     /// Adds an Azure AI Inference <see cref="IChatCompletionService"/> to the <see cref="IServiceCollection"/>.
     /// </summary>
     /// <param name="services">The <see cref="IServiceCollection"/> instance to augment.</param>
-    /// <param name="modelId">Azure AI Inference model id</param>
-    /// <param name="chatClient"><see cref="ChatCompletionsClient"/> to use for the service. If null, one must be available in the service provider when this service is resolved.</param>
-    /// <param name="serviceId">A local identifier for the given AI service</param>
+    /// <param name="modelId">The Azure AI Inference model ID.</param>
+    /// <param name="chatClient">The <see cref="ChatCompletionsClient"/> to use for the service. If null, one must be available in the service provider when this service is resolved.</param>
+    /// <param name="serviceId">A local identifier for the given AI service.</param>
     /// <returns>The same instance as <paramref name="services"/>.</returns>
     public static IServiceCollection AddAzureAIInferenceChatCompletion(this IServiceCollection services,
         string modelId,
@@ -148,8 +148,8 @@ public static class AzureAIInferenceServiceCollectionExtensions
     /// Adds an Azure AI Inference <see cref="IChatCompletionService"/> to the <see cref="IServiceCollection"/>.
     /// </summary>
     /// <param name="services">The <see cref="IServiceCollection"/> instance to augment.</param>
-    /// <param name="chatClient"><see cref="AzureAIInferenceChatClient"/> to use for the service. If null, one must be available in the service provider when this service is resolved.</param>
-    /// <param name="serviceId">A local identifier for the given AI service</param>
+    /// <param name="chatClient">The <see cref="AzureAIInferenceChatClient"/> to use for the service. If null, one must be available in the service provider when this service is resolved.</param>
+    /// <param name="serviceId">A local identifier for the given AI service.</param>
     /// <returns>The same instance as <paramref name="services"/>.</returns>
     public static IServiceCollection AddAzureAIInferenceChatCompletion(this IServiceCollection services,
         AzureAIInferenceChatClient? chatClient = null,
@@ -179,7 +179,7 @@ public static class AzureAIInferenceServiceCollectionExtensions
     #region Private
 
     /// <summary>
-    /// The maximum number of auto-invokes that can be in-flight at any given time as part of the current
+    /// The maximum number of auto-invokes that can be in flight at any given time as part of the current
     /// asynchronous chain of execution.
     /// </summary>
     /// <remarks>

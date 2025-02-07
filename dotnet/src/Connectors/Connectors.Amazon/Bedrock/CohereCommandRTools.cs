@@ -7,135 +7,138 @@ using System.Text.Json.Serialization;
 namespace Microsoft.SemanticKernel.Connectors.Amazon;
 
 /// <summary>
-/// Tools accessed by the Command R execution settings and Command R request.
+/// Provides tools accessed by the Command R execution settings and Command R request.
 /// </summary>
 public static class CohereCommandRTools
 {
     /// <summary>
-    /// The required fields for chat_history.
+    /// Defines the required fields for chat_history.
     /// </summary>
     public sealed class ChatMessage
     {
         /// <summary>
-        /// The role for the message. Valid values are USER or CHATBOT. tokens.
+        /// Gets or sets the role for the message.
         /// </summary>
+        /// <value>
+        /// Either <see langword="USER"/> or <see langword="CHATBOT"/>.
+        /// </value>
         [JsonPropertyName("role")]
         public string? Role { get; set; }
 
         /// <summary>
-        /// Text contents of the message.
+        /// Gets or sets the text contents of the message.
         /// </summary>
         [JsonPropertyName("message")]
         public string? Message { get; set; }
     }
 
     /// <summary>
-    /// JSON structure for list of texts that the model can cite to generate a more accurate reply.
+    /// Describes teh JSON structure for list of texts that the model can cite to generate a more accurate reply.
     /// </summary>
     [Serializable]
     public sealed class Document
     {
         /// <summary>
-        /// Possible key field.
+        /// Gets or sets the possible key field.
         /// </summary>
         [JsonPropertyName("title")]
         public string? Title { get; set; }
 
         /// <summary>
-        /// Possible value field.
+        /// Gets or sets the possible value field.
         /// </summary>
         [JsonPropertyName("snippet")]
         public string? Snippet { get; set; }
     }
 
     /// <summary>
-    /// Tool parameters.
+    /// Defines tool parameters.
     /// </summary>
     [Serializable]
     public sealed class Tool
     {
         /// <summary>
-        /// Name of the tool.
+        /// Gets or sets the name of the tool.
         /// </summary>
         [JsonPropertyName("name")]
         public string? Name { get; set; }
 
         /// <summary>
-        /// Description of the tool.
+        /// Gets or sets the description of the tool.
         /// </summary>
         [JsonPropertyName("description")]
         public string? Description { get; set; }
 
         /// <summary>
-        /// Definitions for each tool.
+        /// Gets or sets the definitions for each tool.
         /// </summary>
         [JsonPropertyName("parameter_definitions")]
         public Dictionary<string, ToolParameter> ParameterDefinitions { get; set; } = [];
     }
     /// <summary>
-    /// Components of each tool parameter.
+    /// Describes the components of each tool parameter.
     /// </summary>
     [Serializable]
     public sealed class ToolParameter
     {
         /// <summary>
-        /// Description of parameter.
+        /// Gets or sets the description of the parameter.
         /// </summary>
         [JsonPropertyName("description")]
         public string? Description { get; set; }
 
         /// <summary>
-        /// Parameter type (str, int, etc.) as described in a string.
+        /// Gets or sets the parameter type (for example, str or int) as described in a string.
         /// </summary>
         [JsonPropertyName("type")]
         public string? Type { get; set; }
 
         /// <summary>
-        /// Whether this parameter is required.
+        /// Gets or sets a value that indicates whether this parameter is required.
         /// </summary>
         [JsonPropertyName("required")]
         public bool? Required { get; set; }
     }
 
     /// <summary>
-    /// Cohere tool result.
+    /// Defines a Cohere tool result.
     /// </summary>
     [Serializable]
     public sealed class ToolResult
     {
         /// <summary>
-        /// The tool call.
+        /// Gets or sets the tool call.
         /// </summary>
         [JsonPropertyName("call")]
         public ToolCall? Call { get; set; }
 
         /// <summary>
-        /// Outputs from the tool call.
+        /// Gets or sets the outputs from the tool call.
         /// </summary>
         [JsonPropertyName("outputs")]
         public List<Dictionary<string, string>> Outputs { get; set; } = [];
     }
 
     /// <summary>
-    /// Tool call object to be passed into the tool call.
+    /// Defines a tool call object to be passed into the tool call.
     /// </summary>
     [Serializable]
     public sealed class ToolCall
     {
         /// <summary>
-        /// Name of the tool.
+        /// Gets or sets the name of the tool.
         /// </summary>
         [JsonPropertyName("name")]
         public string? Name { get; set; }
 
         /// <summary>
-        /// Parameters for the tool.
+        /// Gets or sets the parameters for the tool.
         /// </summary>
         [JsonPropertyName("parameters")]
         public Dictionary<string, string> Parameters { get; set; } = [];
 
         /// <summary>
-        /// Tool call identifier generated by the model.
+        /// Gets or sets the tool call identifier generated by the model.
         /// </summary>
         [JsonPropertyName("generation_id")]
         public string? GenerationId { get; set; }

@@ -11,7 +11,7 @@ using Microsoft.SemanticKernel.Text;
 namespace Microsoft.SemanticKernel.Connectors.AzureAIInference;
 
 /// <summary>
-/// Chat completion prompt execution settings.
+/// Provides chat completion prompt execution settings.
 /// </summary>
 [JsonNumberHandling(JsonNumberHandling.AllowReadingFromString)]
 public sealed class AzureAIInferencePromptExecutionSettings : PromptExecutionSettings
@@ -25,8 +25,12 @@ public sealed class AzureAIInferencePromptExecutionSettings : PromptExecutionSet
     }
 
     /// <summary>
+    /// Gets or sets the extra parameters.
     /// Allowed values: "error" | "drop" | "pass-through"
     /// </summary>
+    /// <value>
+    /// <see langword="error"/>, <see langword="drop"/>, or <see langword="pass-through"/>.
+    /// </value>
     [JsonPropertyName("extra_parameters")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public string? ExtraParameters
@@ -40,12 +44,13 @@ public sealed class AzureAIInferencePromptExecutionSettings : PromptExecutionSet
     }
 
     /// <summary>
-    /// A value that influences the probability of generated tokens appearing based on their cumulative
+    /// Gets or sets a value that influences the probability of generated tokens appearing based on their cumulative
     /// frequency in generated text.
-    /// Positive values will make tokens less likely to appear as their frequency increases and
-    /// decrease the likelihood of the model repeating the same statements verbatim.
-    /// Supported range is [-2, 2].
     /// </summary>
+    /// <value>
+    /// A value between -2.0 and 2.0. Positive values make tokens less likely to appear as their frequency increases.
+    /// Positive values also decrease the likelihood of the model repeating the same statements verbatim.
+    /// </value>
     [JsonPropertyName("frequency_penalty")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public float? FrequencyPenalty
@@ -59,12 +64,13 @@ public sealed class AzureAIInferencePromptExecutionSettings : PromptExecutionSet
     }
 
     /// <summary>
-    /// A value that influences the probability of generated tokens appearing based on their existing
+    /// Gets or sets a value that influences the probability of generated tokens appearing based on their existing
     /// presence in generated text.
-    /// Positive values will make tokens less likely to appear when they already exist and increase the
-    /// model's likelihood to output new topics.
-    /// Supported range is [-2, 2].
     /// </summary>
+    /// <value>
+    /// A value between -2.0 and 2.0. Positive values make tokens less likely to appear when they already exist.
+    /// Positive values also increase the model's likelihood to output new topics.
+    /// </value>
     [JsonPropertyName("presence_penalty")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public float? PresencePenalty
@@ -78,13 +84,17 @@ public sealed class AzureAIInferencePromptExecutionSettings : PromptExecutionSet
     }
 
     /// <summary>
-    /// The sampling temperature to use that controls the apparent creativity of generated completions.
-    /// Higher values will make output more random while lower values will make results more focused
-    /// and deterministic.
-    /// It is not recommended to modify temperature and top_p for the same completions request as the
-    /// interaction of these two settings is difficult to predict.
-    /// Supported range is [0, 1].
+    /// Gets or sets the sampling temperature, which controls the apparent creativity of generated completions.
     /// </summary>
+    /// <value>
+    /// A value between 0.0 and 1.0, with 0.0 being the most deterministic and 1.0 being the most creative.
+    /// </value>
+    /// <remarks>
+    /// Higher values make output more random, while lower values make results more focused
+    /// and deterministic.
+    /// It is not recommended to modify temperature and <see cref="TopP"/> for the same completions request,
+    /// as the interaction of these two settings is difficult to predict.
+    /// </remarks>
     [JsonPropertyName("temperature")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public float? Temperature
@@ -98,14 +108,18 @@ public sealed class AzureAIInferencePromptExecutionSettings : PromptExecutionSet
     }
 
     /// <summary>
-    /// An alternative to sampling with temperature called nucleus sampling. This value causes the
-    /// model to consider the results of tokens with the provided probability mass. As an example, a
+    /// Gets or sets the nucleus-sampling factor, an alternative to sampling with temperature.
+    /// </summary>
+    /// <value>
+    /// A value between 0.0 and 1.0.
+    /// </value>
+    /// <remarks>
+    /// This value causes the model to consider the results of tokens with the provided probability mass. As an example, a
     /// value of 0.15 will cause only the tokens comprising the top 15% of probability mass to be
     /// considered.
-    /// It is not recommended to modify temperature and top_p for the same completions request as the
+    /// It's not recommended to modify temperature and the nucleus sampling factor for the same completions request, as the
     /// interaction of these two settings is difficult to predict.
-    /// Supported range is [0, 1].
-    /// </summary>
+    /// </remarks>
     [JsonPropertyName("top_p")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public float? NucleusSamplingFactor
@@ -118,7 +132,9 @@ public sealed class AzureAIInferencePromptExecutionSettings : PromptExecutionSet
         }
     }
 
-    /// <summary> The maximum number of tokens to generate. </summary>
+    /// <summary>
+    /// Gets or sets the maximum number of tokens to generate.
+    /// </summary>
     [JsonPropertyName("max_tokens")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public int? MaxTokens
@@ -132,12 +148,15 @@ public sealed class AzureAIInferencePromptExecutionSettings : PromptExecutionSet
     }
 
     /// <summary>
-    /// The format that the model must output. Use this to enable JSON mode instead of the default text mode.
-    /// Note that to enable JSON mode, some AI models may also require you to instruct the model to produce JSON
-    /// via a system or user message.
-    /// Please note <see cref="ChatCompletionsResponseFormat"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
-    /// The available derived classes include <see cref="ChatCompletionsResponseFormatJSON"/> and <see cref="ChatCompletionsResponseFormatText"/>.
+    /// Gets or sets the format that the model must output.
     /// </summary>
+    /// <remarks>
+    /// Use this property to enable JSON mode instead of the default text mode.
+    /// To enable JSON mode, some AI models might also require you to instruct the model to produce JSON
+    /// via a system or user message.
+    /// <see cref="ChatCompletionsResponseFormat"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
+    /// The available derived classes include <see cref="ChatCompletionsResponseFormatJSON"/> and <see cref="ChatCompletionsResponseFormatText"/>.
+    /// </remarks>
     [JsonPropertyName("response_format")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public object? ResponseFormat
@@ -150,7 +169,9 @@ public sealed class AzureAIInferencePromptExecutionSettings : PromptExecutionSet
         }
     }
 
-    /// <summary> A collection of textual sequences that will end completions generation. </summary>
+    /// <summary>
+    /// Gets or sets a collection of textual sequences that will end completions generation.
+    /// </summary>
     [JsonPropertyName("stop")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public IList<string>? StopSequences
@@ -164,10 +185,12 @@ public sealed class AzureAIInferencePromptExecutionSettings : PromptExecutionSet
     }
 
     /// <summary>
-    /// The available tool definitions that the chat completions request can use, including caller-defined functions.
-    /// Please note <see cref="ChatCompletionsToolDefinition"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
-    /// The available derived classes include <see cref="ChatCompletionsToolDefinition"/>.
+    /// Gets or sets the available tool definitions that the chat completions request can use, including caller-defined functions.
     /// </summary>
+    /// <remarks>
+    /// <see cref="ChatCompletionsToolDefinition"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
+    /// The available derived classes include <see cref="ChatCompletionsToolDefinition"/>.
+    /// </remarks>
     [JsonPropertyName("tools")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public IList<ChatCompletionsToolDefinition>? Tools
@@ -181,9 +204,12 @@ public sealed class AzureAIInferencePromptExecutionSettings : PromptExecutionSet
     }
 
     /// <summary>
+    /// Gets or sets the seed value that affects determinism.
+    /// </summary>
+    /// <remarks>
     /// If specified, the system will make a best effort to sample deterministically such that repeated requests with the
     /// same seed and parameters should return the same result. Determinism is not guaranteed.
-    /// </summary>
+    /// </remarks>
     [JsonPropertyName("seed")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public long? Seed
@@ -237,10 +263,10 @@ public sealed class AzureAIInferencePromptExecutionSettings : PromptExecutionSet
     }
 
     /// <summary>
-    /// Create a new settings object with the values from another settings object.
+    /// Creates a new settings object with the values from another settings object.
     /// </summary>
-    /// <param name="executionSettings">Template configuration</param>
-    /// <returns>An instance of <see cref="AzureAIInferencePromptExecutionSettings"/></returns>
+    /// <param name="executionSettings">The template configuration.</param>
+    /// <returns>An instance of <see cref="AzureAIInferencePromptExecutionSettings"/>.</returns>
     public static AzureAIInferencePromptExecutionSettings FromExecutionSettings(PromptExecutionSettings? executionSettings)
     {
         if (executionSettings is null)

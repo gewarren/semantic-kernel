@@ -8,7 +8,7 @@ using Microsoft.SemanticKernel.Text;
 namespace Microsoft.SemanticKernel.Connectors.Amazon;
 
 /// <summary>
-/// Prompt execution settings for AI21 Labs Jurassic Text Generation
+/// Provides prompt execution settings for AI21 Labs Jurassic Text Generation.
 /// </summary>
 [JsonNumberHandling(JsonNumberHandling.AllowReadingFromString)]
 public class AmazonJurassicExecutionSettings : PromptExecutionSettings
@@ -22,8 +22,11 @@ public class AmazonJurassicExecutionSettings : PromptExecutionSettings
     private AI21JurassicPenalties? _frequencyPenalty;
 
     /// <summary>
-    /// Use a lower value to decrease randomness in the response.
+    /// Gets or sets a value that indicates how much variation is provided in each answer.
     /// </summary>
+    /// <remarks>
+    /// Use a lower value to decrease randomness in the response.
+    /// </remarks>
     [JsonPropertyName("temperature")]
     public float? Temperature
     {
@@ -36,8 +39,11 @@ public class AmazonJurassicExecutionSettings : PromptExecutionSettings
     }
 
     /// <summary>
-    /// Use a lower value to ignore less probable options.
+    /// Gets or sets the percentile of most-likely candidates that the model considers for the next token.
     /// </summary>
+    /// <remarks>
+    /// Use a lower value to ignore less probable options.
+    /// </remarks>
     [JsonPropertyName("topP")]
     public float? TopP
     {
@@ -50,7 +56,7 @@ public class AmazonJurassicExecutionSettings : PromptExecutionSettings
     }
 
     /// <summary>
-    /// Specify the maximum number of tokens to use in the generated response.
+    /// Gets or sets the maximum number of tokens to use in the generated response.
     /// </summary>
     [JsonPropertyName("maxTokens")]
     public int? MaxTokens
@@ -64,8 +70,11 @@ public class AmazonJurassicExecutionSettings : PromptExecutionSettings
     }
 
     /// <summary>
-    /// Configure stop sequences that the model recognizes and after which it stops generating further tokens. Press the Enter key to insert a newline character in a stop sequence. Use the Tab key to finish inserting a stop sequence.
+    /// Gets or sets a list of stop sequences that the model recognizes and after which it stops generating further tokens.
     /// </summary>
+    /// <remarks>
+    /// Press the Enter key to insert a newline character in a stop sequence. Use the Tab key to finish inserting a stop sequence.
+    /// </remarks>
     [JsonPropertyName("stopSequences")]
     public List<string>? StopSequences
     {
@@ -78,8 +87,11 @@ public class AmazonJurassicExecutionSettings : PromptExecutionSettings
     }
 
     /// <summary>
-    /// Use a higher value to lower the probability of generating new tokens that already appear at least once in the prompt or in the completion. Proportional to the number of appearances.
+    /// Gets or sets the penalty for generating new tokens that already appear in the prompt or completion, proportional to the number of appearances.
     /// </summary>
+    /// <remarks>
+    /// Use a higher value to lower the probability of generating new tokens that already appear at least once in the prompt or in the completion.
+    /// </remarks>
     [JsonPropertyName("countPenalty")]
     public AI21JurassicPenalties? CountPenalty
     {
@@ -92,8 +104,11 @@ public class AmazonJurassicExecutionSettings : PromptExecutionSettings
     }
 
     /// <summary>
-    /// Use a higher value to lower the probability of generating new tokens that already appear at least once in the prompt or in the completion.
+    /// Gets or sets the penalty for generating new tokens that already appear in the prompt or completion.
     /// </summary>
+    /// <remarks>
+    /// Use a higher value to lower the probability of generating new tokens that already appear at least once in the prompt or in the completion.
+    /// </remarks>
     [JsonPropertyName("presencePenalty")]
     public AI21JurassicPenalties? PresencePenalty
     {
@@ -106,7 +121,10 @@ public class AmazonJurassicExecutionSettings : PromptExecutionSettings
     }
 
     /// <summary>
-    /// Use a high value to lower the probability of generating new tokens that already appear at least once in the prompt or in the completion. The value is proportional to the frequency of the token appearances (normalized to text length).
+    /// Gets or sets the penalty for generating new tokens that already appear in the prompt or completion.
+    /// </summary>
+    /// <summary>
+    /// Use a higher value to lower the probability of generating new tokens that already appear at least once in the prompt or in the completion. The value is proportional to the frequency of the token appearances (normalized to text length).
     /// </summary>
     [JsonPropertyName("frequencyPenalty")]
     public AI21JurassicPenalties? FrequencyPenalty
@@ -120,10 +138,10 @@ public class AmazonJurassicExecutionSettings : PromptExecutionSettings
     }
 
     /// <summary>
-    /// Converts PromptExecutionSettings to AmazonJurassicExecutionSettings
+    /// Converts PromptExecutionSettings to AmazonJurassicExecutionSettings.
     /// </summary>
     /// <param name="executionSettings">The Kernel standard PromptExecutionSettings.</param>
-    /// <returns>Model specific execution settings</returns>
+    /// <returns>Model-specific execution settings.</returns>
     public static AmazonJurassicExecutionSettings FromExecutionSettings(PromptExecutionSettings? executionSettings)
     {
         switch (executionSettings)

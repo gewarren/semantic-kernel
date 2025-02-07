@@ -13,18 +13,18 @@ using Microsoft.SemanticKernel.TextGeneration;
 namespace Microsoft.SemanticKernel;
 
 /// <summary>
-/// Extensions for adding Bedrock modality services to the service collection.
+/// Provides extensions for adding Bedrock modality services to the service collection.
 /// </summary>
 public static class BedrockServiceCollectionExtensions
 {
     /// <summary>
-    /// Add Amazon Bedrock Chat Completion service to the <see cref="IServiceCollection" />.
+    /// Adds Amazon Bedrock Chat Completion service to the <see cref="IServiceCollection" />.
     /// </summary>
     /// <param name="service">The service collection.</param>
     /// <param name="modelId">The model for chat completion.</param>
-    /// <param name="bedrockRuntime">The optional <see cref="IAmazonBedrockRuntime" /> to use. If not provided will be retrieved from the Service Collection.</param>
+    /// <param name="bedrockRuntime">The optional <see cref="IAmazonBedrockRuntime" /> to use. If not provided, it's retrieved from the Service Collection.</param>
     /// <param name="serviceId">The optional service ID.</param>
-    /// <returns>Returns back <see cref="IServiceCollection"/> with a configured service.</returns>
+    /// <returns>An <see cref="IServiceCollection"/> with a configured service.</returns>
     public static IServiceCollection AddBedrockChatCompletionService(
         this IServiceCollection service,
         string modelId,
@@ -63,13 +63,13 @@ public static class BedrockServiceCollectionExtensions
     }
 
     /// <summary>
-    /// Add Amazon Bedrock Text Generation service to the <see cref="IServiceCollection" />.
+    /// Adds Amazon Bedrock Text Generation service to the <see cref="IServiceCollection" />.
     /// </summary>
     /// <param name="services">The service collection.</param>
     /// <param name="modelId">The model for text generation.</param>
-    /// <param name="bedrockRuntime">The optional <see cref="IAmazonBedrockRuntime" /> to use. If not provided will be retrieved from the Service Collection.</param>
+    /// <param name="bedrockRuntime">The optional <see cref="IAmazonBedrockRuntime" /> to use. If not provided, it's retrieved from the Service Collection.</param>
     /// <param name="serviceId">The optional service ID.</param>
-    /// <returns>Returns back <see cref="IServiceCollection"/> with a configured service.</returns>
+    /// <returns>An <see cref="IServiceCollection"/> with a configured service.</returns>
     public static IServiceCollection AddBedrockTextGenerationService(
         this IServiceCollection services,
         string modelId,

@@ -8,7 +8,7 @@ using Microsoft.SemanticKernel.Text;
 namespace Microsoft.SemanticKernel.Connectors.Amazon;
 
 /// <summary>
-/// Prompt execution settings for Anthropic Claude Text Generation
+/// Provides prompt execution settings for Anthropic Claude Text Generation.
 /// </summary>
 [JsonNumberHandling(JsonNumberHandling.AllowReadingFromString)]
 public sealed class AmazonClaudeExecutionSettings : PromptExecutionSettings
@@ -20,13 +20,16 @@ public sealed class AmazonClaudeExecutionSettings : PromptExecutionSettings
     private int? _topK;
 
     /// <summary>
-    /// Default max tokens for a text generation.
+    /// Specifies the default maximum number of tokens for a text generation.
     /// </summary>
     private const int DefaultTextMaxTokens = 200;
 
     /// <summary>
-    /// (Required) The maximum number of tokens to generate before stopping. We recommend a limit of 4,000 tokens for optimal performance.
+    /// Gets or sets the maximum number of tokens to generate before stopping.
     /// </summary>
+    /// <remarks>
+    /// For optimal performance, a limit of 4,000 tokens is recommended.
+    /// </remarks>
     [JsonPropertyName("max_tokens_to_sample")]
     public int MaxTokensToSample
     {
@@ -39,8 +42,11 @@ public sealed class AmazonClaudeExecutionSettings : PromptExecutionSettings
     }
 
     /// <summary>
-    /// (Optional) Sequences that will cause the model to stop generating. Anthropic Claude models stop on "\n\nHuman:", and may include additional built-in stop sequences in the future.Use the stop_sequences inference parameter to include additional strings that will signal the model to stop generating text.
+    /// Gets or sets the sequences that cause the model to stop generating.
     /// </summary>
+    /// <remarks>
+    /// Anthropic Claude models stop on "\n\nHuman:", and might include additional built-in stop sequences in the future. Use the stop_sequences inference parameter to include additional strings that will signal the model to stop generating text.
+    /// </remarks>
     [JsonPropertyName("stop_sequences")]
     public List<string>? StopSequences
     {
@@ -53,8 +59,11 @@ public sealed class AmazonClaudeExecutionSettings : PromptExecutionSettings
     }
 
     /// <summary>
-    /// (Optional) The amount of randomness injected into the response. Use a value closer to 0 for analytical / multiple choice, and a value closer to 1 for creative and generative tasks.
+    /// Gets or sets the amount of randomness injected into the response.
     /// </summary>
+    /// <value>
+    /// Use a value closer to 0.0 for analytical or multiple choice, and a value closer to 1.0 for creative and generative tasks.
+    /// </value>
     [JsonPropertyName("temperature")]
     public float? Temperature
     {
@@ -67,8 +76,11 @@ public sealed class AmazonClaudeExecutionSettings : PromptExecutionSettings
     }
 
     /// <summary>
-    /// (Optional) Use nucleus sampling. In nucleus sampling, Anthropic Claude computes the cumulative distribution over all the options for each subsequent token in decreasing probability order and cuts it off once it reaches a particular probability specified by top_p.You should alter either temperature or top_p, but not both.
+    /// Gets or sets the percentile of most-likely candidates that the model considers for the next token.
     /// </summary>
+    /// <remarks>
+    /// In nucleus sampling, Anthropic Claude computes the cumulative distribution over all the options for each subsequent token in decreasing probability order and cuts it off once it reaches a particular probability specified by <see cref="TopP"/>. You should set either <see cref="Temperature"/> or <see cref="TopP"/>, but not both.
+    /// </remarks>
     [JsonPropertyName("top_p")]
     public float? TopP
     {
@@ -81,8 +93,11 @@ public sealed class AmazonClaudeExecutionSettings : PromptExecutionSettings
     }
 
     /// <summary>
-    /// (Optional) Only sample from the top K options for each subsequent token. Use top_k to remove long tail low probability responses.
+    /// Gets or sets the number of most-likely candidates that the model considers for the next token.
     /// </summary>
+    /// <remarks>
+    /// Use TopK to remove long tail, low probability responses.
+    /// </remarks>
     [JsonPropertyName("top_k")]
     public int? TopK
     {
@@ -95,10 +110,10 @@ public sealed class AmazonClaudeExecutionSettings : PromptExecutionSettings
     }
 
     /// <summary>
-    /// Converts PromptExecutionSettings to ClaudeExecutionSettings
+    /// Converts PromptExecutionSettings to ClaudeExecutionSettings.
     /// </summary>
     /// <param name="executionSettings">The Kernel standard PromptExecutionSettings.</param>
-    /// <returns>Model specific execution settings.</returns>
+    /// <returns>Model-specific execution settings.</returns>
     public static AmazonClaudeExecutionSettings FromExecutionSettings(PromptExecutionSettings? executionSettings)
     {
         switch (executionSettings)

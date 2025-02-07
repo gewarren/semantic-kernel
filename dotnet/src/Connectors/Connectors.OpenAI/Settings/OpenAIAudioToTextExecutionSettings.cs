@@ -80,11 +80,15 @@ public sealed class OpenAIAudioToTextExecutionSettings : PromptExecutionSettings
     }
 
     /// <summary>
-    /// The sampling temperature, between 0 and 1.
-    /// Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.
-    /// If set to 0, the model will use log probability to automatically increase the temperature until certain thresholds are hit.
-    /// Default is 0.
+    /// Gets or sets the sampling temperature.
     /// </summary>
+    /// <value>
+    /// A value between 0.0 and 1.0. The default is 0.0.
+    /// </value>
+    /// <remarks>
+    /// Higher values, like 0.8, make the output more random. Lower values, like 0.2, make it more focused and deterministic.
+    /// If set to 0.0, the model uses log probability to automatically increase the temperature until certain thresholds are hit.
+    /// </remarks>
     [JsonPropertyName("temperature")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public float? Temperature

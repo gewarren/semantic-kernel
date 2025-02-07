@@ -5,18 +5,18 @@ using Amazon.BedrockRuntime;
 namespace Microsoft.SemanticKernel;
 
 /// <summary>
-/// Extensions for adding Bedrock modality services to the kernel builder configuration.
+/// Provides extensions for adding Bedrock modality services to the kernel builder configuration.
 /// </summary>
 public static class BedrockKernelBuilderExtensions
 {
     /// <summary>
-    /// Add Amazon Bedrock Chat Completion service to the kernel builder using IAmazonBedrockRuntime object.
+    /// Adds Amazon Bedrock Chat Completion service to the kernel builder using IAmazonBedrockRuntime object.
     /// </summary>
     /// <param name="builder">The kernel builder.</param>
     /// <param name="modelId">The model for chat completion.</param>
-    /// <param name="bedrockRuntime">The optional <see cref="IAmazonBedrockRuntime" /> to use. If not provided will be retrieved from the Service Collection.</param>
+    /// <param name="bedrockRuntime">The optional <see cref="IAmazonBedrockRuntime" /> to use. If not provided, it's retrieved from the Service Collection.</param>
     /// <param name="serviceId">The optional service ID.</param>
-    /// <returns>Returns back <see cref="IKernelBuilder"/> with a configured service.</returns>
+    /// <returns>An <see cref="IKernelBuilder"/> with a configured service.</returns>
     public static IKernelBuilder AddBedrockChatCompletionService(
         this IKernelBuilder builder,
         string modelId,
@@ -31,13 +31,13 @@ public static class BedrockKernelBuilderExtensions
     }
 
     /// <summary>
-    /// Add Amazon Bedrock Text Generation service to the kernel builder using IAmazonBedrockRuntime object.
+    /// Adds Amazon Bedrock Text Generation service to the kernel builder using IAmazonBedrockRuntime object.
     /// </summary>
     /// <param name="builder">The kernel builder.</param>
     /// <param name="modelId">The model for text generation.</param>
-    /// <param name="bedrockRuntime">The optional <see cref="IAmazonBedrockRuntime" /> to use. If not provided will be retrieved from the Service Collection.</param>
+    /// <param name="bedrockRuntime">The optional <see cref="IAmazonBedrockRuntime" /> to use. If not provided, it's retrieved from the Service Collection.</param>
     /// <param name="serviceId">The optional service ID.</param>
-    /// <returns>Returns back <see cref="IKernelBuilder"/> with a configured service.</returns>
+    /// <returns>An <see cref="IKernelBuilder"/> with a configured service.</returns>
     public static IKernelBuilder AddBedrockTextGenerationService(
         this IKernelBuilder builder,
         string modelId,

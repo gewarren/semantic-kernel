@@ -8,7 +8,7 @@ using Microsoft.SemanticKernel.Text;
 namespace Microsoft.SemanticKernel.Connectors.Amazon;
 
 /// <summary>
-/// Prompt execution settings for AI21 Jamba Chat Completion
+/// Provides prompt execution settings for AI21 Jamba Chat Completion.
 /// </summary>
 [JsonNumberHandling(JsonNumberHandling.AllowReadingFromString)]
 public class AmazonJambaExecutionSettings : PromptExecutionSettings
@@ -22,8 +22,11 @@ public class AmazonJambaExecutionSettings : PromptExecutionSettings
     private double? _presencePenalty;
 
     /// <summary>
-    /// How much variation to provide in each answer. Setting this value to 0 guarantees the same response to the same question every time. Setting a higher value encourages more variation. Modifies the distribution from which tokens are sampled. Default: 1.0, Range: 0.0 – 2.0
+    /// Gets or sets a value that indicates how much variation is provided in each answer.
     /// </summary>
+    /// <value>
+    /// A number between 0.0 and 2.0 that indicates how much variation is provided in each answer. A value of 0.0 guarantees the same response to the same question every time. The default value is 1.0.
+    /// </value>
     [JsonPropertyName("temperature")]
     public float? Temperature
     {
@@ -36,8 +39,11 @@ public class AmazonJambaExecutionSettings : PromptExecutionSettings
     }
 
     /// <summary>
-    /// Limit the pool of next tokens in each step to the top N percentile of possible tokens, where 1.0 means the pool of all possible tokens, and 0.01 means the pool of only the most likely next tokens.
+    /// Gets or sets the percentile of most-likely candidates that the model considers for the next token.
     /// </summary>
+    /// <value>
+    /// 1.0 if the pool consists of all possible tokens; 0.01 if the pool consists of only the most likely next tokens.
+    /// </value>
     [JsonPropertyName("top_p")]
     public float? TopP
     {
@@ -50,8 +56,14 @@ public class AmazonJambaExecutionSettings : PromptExecutionSettings
     }
 
     /// <summary>
-    /// The maximum number of tokens to allow for each generated response message. Typically, the best way to limit output length is by providing a length limit in the system prompt (for example, "limit your answers to three sentences"). Default: 4096, Range: 0 – 4096.
+    /// Gets or sets the maximum number of tokens to allow for each generated response message.
     /// </summary>
+    /// <value>
+    /// A value between 0 and 4096 that specifies the maximum number of tokens to allow for each generated response message. The default is 4096.
+    /// </value>
+    /// <remarks>
+    /// Typically, the best way to limit output length is by providing a length limit in the system prompt (for example, "limit your answers to three sentences").
+    /// </remarks>
     [JsonPropertyName("max_tokens")]
     public int? MaxTokens
     {
@@ -64,8 +76,11 @@ public class AmazonJambaExecutionSettings : PromptExecutionSettings
     }
 
     /// <summary>
-    /// End the message when the model generates one of these strings. The stop sequence is not included in the generated message. Each sequence can be up to 64K long, and can contain newlines as \n characters.
+    /// Gets or sets the model-generated strings that cause the messaged to be ended.
     /// </summary>
+    /// <remarks>
+    /// The stop sequence is not included in the generated message. Each sequence can be up to 64K long, and can contain newlines as \n characters.
+    /// </remarks>
     [JsonPropertyName("stop")]
     public List<string>? Stop
     {
@@ -78,7 +93,7 @@ public class AmazonJambaExecutionSettings : PromptExecutionSettings
     }
 
     /// <summary>
-    /// How many responses to generate (one for text generation).
+    /// Gets or sets the number of responses that are generated (one for text generation).
     /// </summary>
     [JsonPropertyName("n")]
     public int? NumberOfResponses
@@ -92,8 +107,11 @@ public class AmazonJambaExecutionSettings : PromptExecutionSettings
     }
 
     /// <summary>
-    /// Reduce frequency of repeated words within a single response message by increasing this number. This penalty gradually increases the more times a word appears during response generation. Setting to 2.0 will produce a string with few, if any repeated words.
+    /// Gets or sets the penalty for repeated tokens proportional to how many times they've appeared.
     /// </summary>
+    /// <remarks>
+    /// You can increase this value to reduce the frequency of repeated words within a single response message. This penalty gradually increases the more times a word appears during response generation. Setting to 2.0 will produce a string with few, if any repeated words.
+    /// </remarks>
     [JsonPropertyName("frequency_penalty")]
     public double? FrequencyPenalty
     {
@@ -106,8 +124,11 @@ public class AmazonJambaExecutionSettings : PromptExecutionSettings
     }
 
     /// <summary>
-    /// Reduce the frequency of repeated words within a single message by increasing this number. Unlike frequency penalty, presence penalty is the same no matter how many times a word appears.
+    /// Gets or sets the penalty for all repeated tokens.
     /// </summary>
+    /// <remarks>
+    /// You can increase this value to reduce the frequency of repeated words within a single message. Unlike <see cref="FrequencyPenalty"/>, the presence penalty is applied equally no matter how many times a word appears.
+    /// </remarks>
     [JsonPropertyName("presence_penalty")]
     public double? PresencePenalty
     {
@@ -120,10 +141,10 @@ public class AmazonJambaExecutionSettings : PromptExecutionSettings
     }
 
     /// <summary>
-    /// Converts PromptExecutionSettings to AmazonJambaChatExecutionSettings
+    /// Converts PromptExecutionSettings to AmazonJambaChatExecutionSettings.
     /// </summary>
     /// <param name="executionSettings">The Kernel standard PromptExecutionSettings.</param>
-    /// <returns>Model specific execution settings</returns>
+    /// <returns>Model-specific execution settings.</returns>
     public static AmazonJambaExecutionSettings FromExecutionSettings(PromptExecutionSettings? executionSettings)
     {
         switch (executionSettings)
